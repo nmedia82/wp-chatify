@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WP-Chatify
+ * Plugin Name: WP-Chatify (za:meedia)
  * Description: AI-powered chat widget for WordPress websites using domain-specific tokens
  * Version: 1.0.0
  * Author: Your Name

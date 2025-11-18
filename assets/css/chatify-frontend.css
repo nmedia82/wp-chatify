@@ -5,27 +5,33 @@
 }
 
 .chatify-position-bottom-right {
-    bottom: 20px;
+    bottom: 0;
     right: 20px;
 }
 
 .chatify-position-bottom-left {
-    bottom: 20px;
+    bottom: 0;
     left: 20px;
 }
 
 .chatify-toggle {
-    width: 60px;
-    height: 60px;
-    background: var(--chatify-primary, #007cba);
-    border-radius: 50%;
+    width: auto;
+    height: 150px;
+    background: none;
+    border: none;
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: transform 0.2s ease;
+    box-shadow: none;
+    transition: none;
+}
+
+.chatify-toggle img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
 }
 
 .chatify-toggle:hover {
@@ -37,7 +43,7 @@
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     position: absolute;
-    bottom: 80px;
+    bottom: 160px;
     display: flex;
     flex-direction: column;
 }
