@@ -1,0 +1,31 @@
+.chatify-admin {
+    max-width: 800px;
+}
+
+.chatify-admin .form-table th {
+    width: 200px;
+}
+
+.chatify-admin .regular-text {
+    width: 400px;
+}
+
+.nav-tab-wrapper {
+    margin-bottom: 20px;
+}
+
+.tab-content {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ccd0d4;
+    border-top: none;
+}
+
+.nav-tab {
+    cursor: pointer;
+}
+
+.nav-tab.nav-tab-active {
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
