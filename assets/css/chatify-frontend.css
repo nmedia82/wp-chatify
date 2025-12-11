@@ -16,7 +16,7 @@
 
 .chatify-toggle {
     width: auto;
-    height: 150px;
+    /*height: 150px;*/
     background: none;
     border: none;
     border-radius: 0;
@@ -29,8 +29,8 @@
 }
 
 .chatify-toggle img {
-    width: 150px;
-    height: 150px;
+    /*width: 150px;*/
+    height: 100px;
     object-fit: contain;
 }
 
@@ -93,7 +93,7 @@
     color: white;
     font-size: 24px;
     cursor: pointer;
-    padding: 0;
+    padding: 0 !important;
     width: 24px;
     height: 24px;
     display: flex;

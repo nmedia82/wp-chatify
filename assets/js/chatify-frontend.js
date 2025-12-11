@@ -29,7 +29,7 @@ jQuery(document).ready(function($) {
         if (!question) return;
         
         console.log('Sending message:', question);
-        console.log('AJAX URL:', chatify_ajax.ajax_url);
+        console.log('REST URL:', chatify_ajax.rest_url);
         
         addMessage(question, 'user');
         $('#chatify-input').val('');
@@ -37,20 +37,23 @@ jQuery(document).ready(function($) {
         showTypingIndicator();
         
         $.ajax({
-            url: chatify_ajax.ajax_url,
+            url: chatify_ajax.rest_url,
             type: 'POST',
             data: {
-                action: 'chatify_send_message',
                 question: question,
-                session_id: sessionId,
-                nonce: chatify_ajax.nonce
+                session_id: sessionId
+            },
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-WP-Nonce', chatify_ajax.nonce);
             },
             success: function(response) {
                 hideTypingIndicator();
                 
-                if (response.success) {
-                    addMessage(response.data.answer, 'bot');
-                    sessionId = response.data.sessionId;
+                if (response.answer) {
+                    addMessage(response.answer, 'bot');
+                    if (response.sessionId) {
+                        sessionId = response.sessionId;
+                    }
                 } else {
                     addMessage('Sorry, I encountered an error. Please try again.', 'bot');
                 }
