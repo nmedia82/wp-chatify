@@ -1,19 +1,20 @@
 <?php
+// Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 class Chatify_API {
     private $api_endpoint;
     private $domain_token;
     
     public function __construct() {
-        $this->api_endpoint = CHATIFY_API_BASE . '/agent/ask';
+        $this->api_endpoint = CHATIFY_API_BASE;
         $this->domain_token = get_option('chatify_domain_token', '');
     }
     
     public function send_message($question, $session_id = null) {
-        if (empty($this->domain_token)) {
-            return array('error' => 'Domain token not configured');
-        }
-        
-        $body = array('question' => sanitize_text_field($question));
+        $body = array('message' => sanitize_text_field($question));
         if ($session_id) {
             $body['sessionId'] = sanitize_text_field($session_id);
         }
@@ -21,12 +22,16 @@ class Chatify_API {
         $args = array(
             'method' => 'POST',
             'headers' => array(
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $this->domain_token
+                'Content-Type' => 'application/json'
             ),
             'body' => json_encode($body),
             'timeout' => 30
         );
+        
+        // Debug logging
+        error_log('Chatify API Request URL: ' . $this->api_endpoint);
+        error_log('Chatify API Request Body: ' . json_encode($body));
+        error_log('Chatify API Request Headers: ' . print_r($args['headers'], true));
         
         $response = wp_remote_post($this->api_endpoint, $args);
         
@@ -52,11 +57,16 @@ class Chatify_API {
             return array('error' => $error_msg);
         }
         
-        if (!$data || !isset($data['answer'])) {
+        if (!$data || !isset($data['response'])) {
             return array('error' => 'Invalid API response format');
         }
         
-        return $data;
+        // Convert response to expected format and preserve sessionId
+        $result = array('answer' => $data['response']);
+        if (isset($data['sessionId'])) {
+            $result['sessionId'] = $data['sessionId'];
+        }
+        return $result;
     }
     
     public function test_connection() {

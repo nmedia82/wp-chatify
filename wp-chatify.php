@@ -7,6 +7,7 @@
  * Text Domain: wp-chatify
  */
 
+// Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -14,7 +15,7 @@ if (!defined('ABSPATH')) {
 define('CHATIFY_VERSION', '1.0.0');
 define('CHATIFY_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('CHATIFY_PLUGIN_PATH', plugin_dir_path(__FILE__));
-define('CHATIFY_API_BASE', 'https://63iwbgztz0.execute-api.us-east-1.amazonaws.com/dev/api');
+define('CHATIFY_API_BASE', 'https://ssut09j0y4.execute-api.us-east-1.amazonaws.com/dev/mala/ask/zm-site');
 
 require_once CHATIFY_PLUGIN_PATH . 'includes/class-chatify-activator.php';
 require_once CHATIFY_PLUGIN_PATH . 'includes/class-chatify-admin.php';

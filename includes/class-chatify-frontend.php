@@ -80,6 +80,9 @@ class Chatify_Frontend {
     }
     
     public function handle_rest_message($request) {
+        // Add debug logging
+        error_log('Chatify REST: Request params: ' . print_r($request->get_params(), true));
+        
         // Check if admin only mode is enabled and user is not admin
         if (get_option('chatify_admin_only', false) && !current_user_can('administrator')) {
             return new WP_Error('restricted', 'Chat is currently restricted to administrators only', array('status' => 403));
@@ -89,11 +92,14 @@ class Chatify_Frontend {
         $session_id = sanitize_text_field($request->get_param('session_id'));
         
         if (empty($question)) {
+            error_log('Chatify REST: Empty question received');
             return new WP_Error('empty_question', 'Question is required', array('status' => 400));
         }
         
         $api = new Chatify_API();
         $response = $api->send_message($question, $session_id);
+        
+        error_log('Chatify REST: API response: ' . print_r($response, true));
         
         if (isset($response['error'])) {
             return new WP_Error('api_error', $response['error'], array('status' => 500));
